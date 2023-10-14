@@ -10,39 +10,20 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function DogCard() {
-    const [dogImage,setDogImage]=useState('');
-    // Fetch Random image from dog.ceo API
-    useEffect(()=>{
-        axios.get('https://dog.ceo/api/breeds/image/random')
-            .then((response)=>{
-                setDogImage(response.data.message)
-            })
-            .catch((err)=>{
-                console.err('Error fetching dog image',err);
-            })
-    },[])
+export default function DogCard({dogImages,dogBreed}) {
 
     return (
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 240 }}>
         <CardMedia
-          sx={{ height: 140 }}
-          image={dogImage}
-          title="green iguana"
+          sx={{ height: 240, width:240 }}
+          image={dogImages}
+          title={dogBreed}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+          <Typography  className='flex flex-wrap' gutterBottom variant="h5" component="div">
+            {dogBreed}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     );
   }
